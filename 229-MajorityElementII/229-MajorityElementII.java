@@ -1,4 +1,4 @@
-// Last updated: 08/04/2026, 10:37:26
+// Last updated: 15/04/2026, 12:56:34
 1class Solution {
 2    public List<Integer> majorityElement(int[] nums) {
 3        final int n = nums.length;
