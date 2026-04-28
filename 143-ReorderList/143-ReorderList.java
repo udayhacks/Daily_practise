@@ -1,65 +1,62 @@
-// Last updated: 28/04/2026, 09:10:32
-1/**
-2 * Definition for singly-linked list.
-3 * public class ListNode {
-4 *     int val;
-5 *     ListNode next;
-6 *     ListNode() {}
-7 *     ListNode(int val) { this.val = val; }
-8 *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-9 * }
-10 */
-11class Solution {
+// Last updated: 28/04/2026, 09:26:17
+1class Solution {
+2
+3    ListNode midPoint(ListNode head) {
+4
+5        ListNode slow = head;
+6        ListNode fast = head;
+7
+8        while (fast.next != null && fast.next.next != null) {
+9            fast = fast.next.next;
+10            slow = slow.next;
+11        }
 12
-13    
-14    public void reorderList(ListNode head) {
+13        return slow;
+14    }
 15
-16
-17        ListNode slow = head;
-18        ListNode fast = head;
-19
+16    ListNode reverse(ListNode head) {
+17
+18        ListNode prev = null;
+19        ListNode cur = head;
 20
-21        while( fast.next != null && fast.next.next != null){
-22            fast = fast.next.next;
-23            slow = slow.next;
-24        }
-25
-26        ListNode second = slow.next;
-27        ListNode prev = null ;
-28        slow.next = null;
-29
-30
-31        while( second != null){
-32            
-33            ListNode tmp = second.next;
-34            second.next = prev;
-35            prev = second;
-36            second = tmp;
-37
-38        }
-39
-40        ListNode first = head;
-41        second = prev;
-42
-43
-44        while( second !=null){
-45
+21        while (cur != null) {
+22
+23            ListNode next = cur.next;
+24            cur.next = prev;
+25            prev = cur;
+26            cur = next;
+27        }
+28
+29        return prev;
+30    }
+31
+32    void merge(ListNode first, ListNode second) {
+33
+34        while (second != null) {
+35
+36            ListNode temp1 = first.next;
+37            ListNode temp2 = second.next;
+38
+39            first.next = second;
+40            second.next = temp1;
+41
+42            first = temp1;
+43            second = temp2;
+44        }
+45    }
 46
-47            ListNode firstNext = first.next;
-48            ListNode secondNext = second.next;
-49
-50            first.next = second;
-51            second.next = firstNext;
-52
-53            first = firstNext;
-54            second = secondNext;
-55        }
+47    public void reorderList(ListNode head) {
+48
+49        if (head == null || head.next == null)
+50            return;
+51
+52        ListNode midNode = midPoint(head);
+53
+54        ListNode secondHalf = midNode.next;
+55        midNode.next = null;
 56
-57
+57        ListNode secondHalfReverse = reverse(secondHalf);
 58
-59
-60
-61
-62
-63    }
-64}
+59        merge(head, secondHalfReverse);
+60    }
+61}
