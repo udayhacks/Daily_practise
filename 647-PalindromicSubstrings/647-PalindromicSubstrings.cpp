@@ -1,8 +1,8 @@
-// Last updated: 28/04/2026, 08:08:46
+// Last updated: 28/04/2026, 08:10:34
 1class Solution {
 2
 3private : 
-4    int check(string s, int l ,int r){
+4    int check(string &s, int l ,int r){
 5        int res = 0 ; 
 6        while( l >=0 && r<s.size()&& s[l] == s[r]){
 7            res ++;
